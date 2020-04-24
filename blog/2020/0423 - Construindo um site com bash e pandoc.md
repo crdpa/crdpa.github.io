@@ -41,7 +41,7 @@ Segue o trecho do loop:
     if [ -d "$SRC/blog" ]; then
         for f1 in "$SRC/blog/"*; do
            nf="${f1: -4}"
-           for f2 in "$SRC/blog/$nf/"*.md; do
+           for f2 in "$SRC/blog/$nf/"*.md;
                l2a=$(echo $f2 | sed 's:.*/::')
                l2b="${l2a::-5}"
                printf -- "- %s/[%s](blog/%s/%s)\n" "$nf" "$l2b" "$nf" "$l2a"
@@ -51,6 +51,28 @@ Segue o trecho do loop:
     else
         exit 1
     fi
+
+Primeiro o trecho checa se o diretório blog/ existe e executa um loop em cada diretório existente dentro.
+
+Como o processo retorna o caminho absoluto (dir1/dir2/.../blog/2020) eu utilizo
+
+    nf="${f1: -4}"
+
+para manter os últimos 4 caracteres do resultado, no caso os anos (2019, 2020).
+
+Após isso outro loop se inicia ciclando dentro do diretório de cada ano (variável nf) coletando o resultado, que também retorna caminho absoluto (dir1/.../blog/2020/0423 - Nome.html), portanto utilizo sed para remover todos os caracteres até a última "/", incluindo esta, resultando em 0423 - Nome.html onde atribuo a variável l2a.
+
+Por fim crio outra variável com o nome do arquivo utilizando
+
+    l2b="${l2a::-5}"
+
+e com o ::-5 removo os últimos 5 caracteres (.html) para utilizar como texto no índice.
+
+O comando printf escreve tudo formatado:
+
+    printf -- "- %s/[%s](blog/%s/%s)\n" "$nf" "$l2b" "$nf" "$l2a"
+
+Criando um índice de formato markdown, precedido por hífen.
 
 No final do processo utilizo o comando tac (o inverso de cat) para inverter a ordem fazendo com que as postagens mais recentes fiquem no topo, deixando o índice melhor organizado.
 

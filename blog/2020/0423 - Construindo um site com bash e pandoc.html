@@ -44,7 +44,7 @@ bottom() {
 <pre><code>if [ -d &quot;$SRC/blog&quot; ]; then
     for f1 in &quot;$SRC/blog/&quot;*; do
        nf=&quot;${f1: -4}&quot;
-       for f2 in &quot;$SRC/blog/$nf/&quot;*.md; do
+       for f2 in &quot;$SRC/blog/$nf/&quot;*.md;
            l2a=$(echo $f2 | sed &#39;s:.*/::&#39;)
            l2b=&quot;${l2a::-5}&quot;
            printf -- &quot;- %s/[%s](blog/%s/%s)\n&quot; &quot;$nf&quot; &quot;$l2b&quot; &quot;$nf&quot; &quot;$l2a&quot;
@@ -54,6 +54,17 @@ bottom() {
 else
     exit 1
 fi</code></pre>
+<p>Primeiro o trecho checa se o diretório blog/ existe e executa um loop em cada diretório existente dentro.</p>
+<p>Como o processo retorna o caminho absoluto (dir1/dir2/…/blog/2020) eu utilizo</p>
+<pre><code>nf=&quot;${f1: -4}&quot;</code></pre>
+<p>para manter os últimos 4 caracteres do resultado, no caso os anos (2019, 2020).</p>
+<p>Após isso outro loop se inicia ciclando dentro do diretório de cada ano (variável nf) coletando o resultado, que também retorna caminho absoluto (dir1/…/blog/2020/0423 - Nome.html), portanto utilizo sed para remover todos os caracteres até a última “/”, incluindo esta, resultando em 0423 - Nome.html onde atribuo a variável l2a.</p>
+<p>Por fim crio outra variável com o nome do arquivo utilizando</p>
+<pre><code>l2b=&quot;${l2a::-5}&quot;</code></pre>
+<p>e com o ::-5 removo os últimos 5 caracteres (.html) para utilizar como texto no índice.</p>
+<p>O comando printf escreve tudo formatado:</p>
+<pre><code>printf -- &quot;- %s/[%s](blog/%s/%s)\n&quot; &quot;$nf&quot; &quot;$l2b&quot; &quot;$nf&quot; &quot;$l2a&quot;</code></pre>
+<p>Criando um índice de formato markdown, precedido por hífen.</p>
 <p>No final do processo utilizo o comando tac (o inverso de cat) para inverter a ordem fazendo com que as postagens mais recentes fiquem no topo, deixando o índice melhor organizado.</p>
 <p>Deixei tudo muito simples e o formato final você já visualizou antes de entrar nesta página.</p>
 <p>Você pode ver e baixar os scripts no meu <a href="https://github.com/crdpa/bsgs">repositório</a>.</p>
