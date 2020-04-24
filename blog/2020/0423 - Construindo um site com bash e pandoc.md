@@ -5,7 +5,7 @@ Agora, em meio a essa pandemia e isolamento, resolvi deixar a preguiça de lado.
 
 Como não quero nada muito complexo e aproveitando para praticar um pouco mais de shell script, optei por utilizar [pandoc](https://pandoc.org/) para converter markdown em html e criar dois scripts automatizando todo o processo.
 
-O pandoc me permite converter arquivos markdown em html sem gerar uma página completa, me deixando apenas com o conteúdo que fica entre as tags <body></body> do arquivo html.
+O pandoc me permite converter arquivos markdown em html sem gerar uma página completa, me deixando apenas com o conteúdo que fica entre as tags \<body\>\</body\> do arquivo html.
 
 Decidi criar um arquivo para o topo da página chamado top.html onde escreveria o menu geral e o meu script escreveria o início do documento html, concatenaria o arquivo top.html, depois o arquivo html da página principal e por fim escreveria o final do código html, fechando o código.
 

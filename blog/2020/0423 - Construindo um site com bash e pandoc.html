@@ -15,10 +15,7 @@
 <h2 id="section">23/04/2020</h2>
 <p>Há tempos venho alimentando a idéia de criar um site pequeno pra escrever textos com informações que adquiro ao longo do tempo, mas sempre acabo deixando de lado. Agora, em meio a essa pandemia e isolamento, resolvi deixar a preguiça de lado.</p>
 <p>Como não quero nada muito complexo e aproveitando para praticar um pouco mais de shell script, optei por utilizar <a href="https://pandoc.org/">pandoc</a> para converter markdown em html e criar dois scripts automatizando todo o processo.</p>
-O pandoc me permite converter arquivos markdown em html sem gerar uma página completa, me deixando apenas com o conteúdo que fica entre as tags
-<body>
-</body>
-<p>do arquivo html.</p>
+<p>O pandoc me permite converter arquivos markdown em html sem gerar uma página completa, me deixando apenas com o conteúdo que fica entre as tags &lt;body&gt;&lt;/body&gt; do arquivo html.</p>
 <p>Decidi criar um arquivo para o topo da página chamado top.html onde escreveria o menu geral e o meu script escreveria o início do documento html, concatenaria o arquivo top.html, depois o arquivo html da página principal e por fim escreveria o final do código html, fechando o código.</p>
 <p>Criei duas funções que são utilizadas após converter o arquivo em html. A função header cria o início da página baseada no nome do arquivo que informei no comando e a função bottom fecha as tags necessárias.</p>
 <pre><code>header() {
