@@ -1,5 +1,5 @@
 ::selection {
-    background: #666666;
+    background: #cc6699;
 }
 
 body {
@@ -16,6 +16,7 @@ pre {
     background-color: #222222;
     color: #99cc66;
     padding: 1em;
+    overflow: auto;
     border: 0;
 }
 
@@ -48,3 +49,8 @@ li:before {
     padding-right: 8px;
 }
 
+@media only screen and (max-device-width: 736px) {
+      body {
+              padding: 25px;
+      }
+}
