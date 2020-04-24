@@ -23,11 +23,11 @@ A função header da início a página html baseada no nome do arquivo html que 
             echo "  <title>$1</title>" >> $filename.html
         fi
         echo "  <link rel=\"stylesheet\" href=\"styles.css\">" >> $filename.html
-        { echo "</head>"; echo "<body>"; echo "<div id=\"wrap\">"; echo ""; } >> $filename.html
+        { echo "</head>"; echo "<body>"; echo ""; } >> $filename.html
     }
     
     bottom() {
-        { echo "</div>"; echo "</body>"; echo "</html>"; } >> $filename.html
+        { echo "</body>"; echo "</html>"; } >> $filename.html
     }
 
 O funcionamento é simples. O script é invocado informando um ou dois argumentos. O primeiro é o arquivo markdown a ser convertido em html e o segundo é o título que a página terá. Se o título não for informado, o script passa o nome do arquivo como tĩtulo.
