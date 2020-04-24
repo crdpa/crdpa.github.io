@@ -1,1 +1,1 @@
-[ [Cris](index.html) | [Blog](blog.html) ]
+[ [Cris](/index.html) | [Blog](/blog.html) ]
