@@ -3,7 +3,7 @@ Sou graduado em Tecnólogo em Automação Industrial pela Fatec e atualmente tra
 
 Utilizo Linux exclusivamente desde os meus 16 anos de idade, começando pelo Mandrake, passando por Slackware, Debian, Gentoo e atualmente utilizo Void Linux.
 
-Criei esse site para escrever minhas idéias relacionadas a qualquer coisa que seja de meu interesse, funcionando como um portfolio e um blog pessoal.
+Criei esse site para escrever minhas idéias relacionadas a qualquer coisa que seja de meu interesse, funcionando como um portfólio e um blog pessoal.
 
 # Habilidades
 - Linux
