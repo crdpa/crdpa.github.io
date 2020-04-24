@@ -1,19 +1,13 @@
 main {
     font-family: monospace, monospace;
-    max-width: 38rem;
+    max-width: 80%;
     padding: 2rem;
     margin: auto;
 }
 
 #wrap {
-    width: 900px;
+    width: 80%;
     margin: 0 auto;
-}
-
-@media only screen and (max-device-width: 736px) {
-    main {
-        padding: 0rem;
-    }
 }
 
 ::selection {
@@ -22,6 +16,9 @@ main {
 
 body {
     font-family: monospace, monospace;
+    font-size: 16px;
+    line-height: 1.4;
+    width: 70%;
     background: #333333;
     color: #cccccc;
 }
