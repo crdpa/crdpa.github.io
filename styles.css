@@ -51,6 +51,6 @@ li:before {
 
 @media only screen and (max-device-width: 736px) {
       body {
-              padding: 5px 25px;
+              padding: 3px 25px;
       }
 }
