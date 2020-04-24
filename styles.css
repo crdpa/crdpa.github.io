@@ -1,0 +1,69 @@
+main {
+    font-family: monospace, monospace;
+    max-width: 38rem;
+    padding: 2rem;
+    margin: auto;
+}
+
+#wrap {
+    width: 900px;
+    margin: 0 auto;
+}
+
+@media only screen and (max-device-width: 736px) {
+    main {
+        padding: 0rem;
+    }
+}
+
+::selection {
+    background: #666666;
+}
+
+body {
+    background: #333333;
+    color: #cccccc;
+}
+
+pre {
+    background-color: #666666;
+    padding: 1em;
+    border: 0;
+}
+
+a, a:active {
+    color: #ccff99;
+}
+
+a:visited {
+    color: #999999;
+}
+
+    h1, h2, h3, h4, h5 {
+    font-size: 100%;
+    color: #cc99ff;
+    margin-bottom: .1rem;
+}
+
+blockquote {
+    border-left: 1px solid #bdae93;
+    margin: 0.5em 10px;
+    padding: 0.5em 10px;
+}
+
+ul {
+    list-style: none; /* Remove list bullets */
+    padding: 0;
+    margin: 0;
+}
+
+li:before {
+    content: "-";
+    padding-right: 8px;
+}
+
+footer {
+    align: center;
+}
+
+

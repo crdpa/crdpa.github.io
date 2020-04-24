@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>0423 - Construindo um site com bash e pandoc | crdpa</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="wrap">
+
+<p>[ <a href="index.html">Cris</a> | <a href="blog.html">Blog</a> ]</p>
+
+<h1 id="construindo-um-site-com-bash-e-pandoc">Construindo um site com bash e pandoc</h1>
+<h2 id="section">23/04/2020</h2>
+<p>Há tempos venho alimentando a idéia de criar um site pequeno pra reunir idéias e informações que adquiro com o tempo, mas sempre acabo deixando de lado. Agora, em meio a essa pandemia e isolamento, resolvi deixar a preguiça de lado.</p>
+<p>Como não quero nada muito complexo e aproveitando para praticar um pouco mais de shell script, optei por utilizar <a href="https://pandoc.org/">pandoc</a> para converter markdown em html e criar dois scripts automatizando todo o processo.</p>
+<p>O que eu quero é que todas as páginas apresentassem o mesmo topo com links para a página inicial e outro para os textos que irei escrever ao longo do tempo.</p>
+O pandoc me permite converter arquivos markdown em html sem gerar uma página completa, me deixando apenas com o conteúdo que iria entre as tags
+<body>
+</body>
+<p>do arquivo html.</p>
+<p>Decidi em criar um arquivo para o topo da página chamado top.html onde escreveria o menu geral e o meu script escreveria o início do documento html, concatenaria o menu, depois o arquivo html da pãgina principal e por fim escreveria o final do código html. Para ficar mais fácil criei duas funções.</p>
+<p>A função header da início a página html baseada no nome do arquivo html que informei no comando e a função fecha as tags necessárias.</p>
+<pre><code>header() {
+    echo &quot;&lt;!DOCTYPE html&gt;&quot; &gt; $filename.html
+    { echo &quot;&lt;html&gt;&quot;; echo &quot;&lt;head&gt;&quot;; } &gt;&gt; $filename.html
+    if [ -z &quot;$1&quot; ]; then
+        echo &quot;No title supplied. Using name of the file.&quot; &gt;&amp;2
+        echo &quot;  &lt;title&gt;$filename&lt;/title&gt;&quot; &gt;&gt; $filename.html
+    else
+        echo &quot;  &lt;title&gt;$1&lt;/title&gt;&quot; &gt;&gt; $filename.html
+    fi
+    echo &quot;  &lt;link rel=\&quot;stylesheet\&quot; href=\&quot;styles.css\&quot;&gt;&quot; &gt;&gt; $filename.html
+    { echo &quot;&lt;/head&gt;&quot;; echo &quot;&lt;body&gt;&quot;; echo &quot;&lt;div id=\&quot;wrap\&quot;&gt;&quot;; echo &quot;&quot;; } &gt;&gt; $filename.html
+}
+
+bottom() {
+    { echo &quot;&lt;/div&gt;&quot;; echo &quot;&lt;/body&gt;&quot;; echo &quot;&lt;/html&gt;&quot;; } &gt;&gt; $filename.html
+}</code></pre>
+<p>O funcionamento é simples. O script é invocado informando um ou dois argumentos. O primeiro é o arquivo markdown a ser convertido em html e o segundo é o título que a página terá. Se o título não for informado, o script passa o nome do arquivo como tĩtulo. É algo bem simples, mas por enquanto está servindo bem ao propósito.</p>
+<p>O próximo passo foi criar outro script para automatizar o índice da seção <a href="blog.html">blog</a> do site. Cada vez que eu escrever algo novo é só rodar o script para gerar um novo índice. Para facilitar o processo, a hierarquia de diretórios ficou como blog/ano e o nome do arquivo seria MESDIA - Titulo do texto.md, ficando blog/2020/0426 - Construindo um site com bash e pandoc.md no caso deste texto.</p>
+<p>O script executa um loop passando pelos diretórios e seus arquivos gerando uma linha para cada arquivo html contido na pasta e formatando como lista em um arquivo markdown.</p>
+<p>Segue o trecho do loop:</p>
+<pre><code>if [ -d &quot;$SRC/blog&quot; ]; then
+    for f1 in &quot;$SRC/blog/&quot;*; do
+       nf=&quot;${f1: -4}&quot;
+       for f2 in &quot;$SRC/blog/$nf/&quot;*.md; do
+           l2a=$(echo $f2 | sed &#39;s:.*/::&#39;)
+           printf -- &quot;- [%s/%s](blog/%s)\n&quot; &quot;$nf&quot; &quot;$l2a&quot; &quot;$l2a&quot;
+       done
+    done
+    tac $tmp &gt; $filename
+else
+    exit 1
+fi</code></pre>
+<p>No final do processo utilizo o comando tac (o inverso de cat) para inverter a ordem fazendo com que as postagens mais recentes fiquem no topo, deixando o índice melhor organizado.</p>
+<p>Deixei tudo muito simples e o formato final você já visualizou antes de entrar nesta página.</p>
+<p>Você pode ver e baixar os scripts no meu <a href="https://github.com/crdpa/bsgs">repositório</a>.</p>
+</div>
+</body>
+</html>
