@@ -25,7 +25,6 @@ Criei esse site para escrever minhas idéias relacionadas a qualquer coisa que s
 # Links
 - [Github](https://github.com/crdpa/)
 - [Lobsters](https://lobste.rs/u/crdpa)
-- [Tildes](https://tildes.net/user/crdpa)
 - [Goodreads](https://www.goodreads.com/user/show/55958511-crdpa)
 
 # Contato
