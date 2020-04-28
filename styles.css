@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: IBM;
-    src: url("PxPlus_IBM_VGA8.ttf") format('truetype');
+    src: url("/PxPlus_IBM_VGA8.ttf") format('truetype');
     font-weight: bold;
     font-style: normal;
 }
