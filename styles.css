@@ -2,8 +2,15 @@
     background: #cc6699;
 }
 
+@font-face {
+    font-family: IBM;
+    src: url("PxPlus_IBM_VGA8.ttf") format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
-    font-family: monospace, monospace;
+    font-family: IBM, monospace, monospace;
     font-size: 16px;
     line-height: 1.4;
     margin: 40px auto;
