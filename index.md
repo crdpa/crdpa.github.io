@@ -1,3 +1,5 @@
+![](/logo.png)
+
 # Info
 Sou graduado como Tecnólogo em Automação Industrial pela Fatec e atualmente trabalho no Instituto Federal de São Paulo.
 
