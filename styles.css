@@ -2,6 +2,12 @@
     background: #cc6699;
 }
 
+img {
+      width: auto ;
+        max-width: 100% ;
+          height: auto ;
+}
+
 body {
     font-family: monospace, monospace;
     font-size: 16px;
