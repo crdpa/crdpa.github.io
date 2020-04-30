@@ -22,9 +22,11 @@
 <pre><code>blog () {
         if [ -f &quot;$f2&quot; ] &amp;&amp; [ ! -f &quot;${f2::-3}.html&quot; ]; then
             pandoc -o &quot;${f2::-3}.tmp.html&quot; &quot;$f2&quot;
-            header &gt; &quot;${f2::-3}.html&quot;
-            cat &quot;${f2::-3}.tmp.html&quot; &gt;&gt; &quot;${f2::-3}.html&quot;
-            bottom &gt;&gt; &quot;${f2::-3}.html&quot;
+            {
+                header
+                cat &quot;${f2::-3}.tmp.html&quot;
+                bottom
+            } &gt; &quot;${f2::-3}.html&quot;
             rm &quot;${f2::-3}.tmp.html&quot;
         fi
         l1=$(echo &quot;${f2::-3}&quot; | sed &#39;s:.*/::&#39;)
