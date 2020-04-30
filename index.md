@@ -12,17 +12,8 @@ Criei esse site para escrever minhas idéias relacionadas a qualquer coisa que s
 - Bash
 - Go
 
-# Hobbies e interesses
-- Linux
-- Programação
-- FOSS
-- Privacidade
-- Minimalismo
-- Boardgames
-- Fitness
-- Metal
-- Livros
-- Filmes
+# Blog
+- 2020/[0423 - Construindo um site com bash e pandoc](blog/2020/0423 - Construindo um site com bash e pandoc.html)
 
 # Links
 - [Github](https://github.com/crdpa/)

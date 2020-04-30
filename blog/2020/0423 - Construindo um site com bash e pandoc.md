@@ -1,81 +1,60 @@
 # Construindo um site com bash e pandoc
-## 23/04/2020
-Há tempos venho alimentando a idéia de criar um site pequeno pra escrever textos com informações que adquiro ao longo do tempo, mas sempre acabo deixando de lado.
+## 30/04/2020
+Há tempos venho alimentando a idéia de criar um site pequeno para escrever textos com informações que adquiro ao longo do tempo, mas sempre acabo deixando de lado.
 Agora, em meio a essa pandemia e isolamento, resolvi deixar a preguiça de lado.
 
-Como não quero nada muito complexo e aproveitando para praticar um pouco mais de shell script, optei por utilizar [pandoc](https://pandoc.org/) para converter markdown em html e criar dois scripts automatizando todo o processo.
+Como não quero nada muito complexo e, aproveitando para praticar um pouco mais de shell script, optei por utilizar [pandoc](https://pandoc.org/) para converter markdown em html e criar um script automatizando todo o processo.
 
 O pandoc me permite converter arquivos markdown em html sem gerar uma página completa, me deixando apenas com o conteúdo que fica entre as tags \<body\>\</body\> do arquivo html.
 
-Decidi criar um arquivo para o topo da página chamado top.html onde escreveria o menu geral e o meu script escreveria o início do documento html, concatenaria o arquivo top.html, depois o arquivo html da página principal e por fim escreveria o final do código html, fechando o código.
+Decidi criar um arquivo para o topo da página chamado "top.md" onde consta o conteúdo da página que fica antes do índice do blog e o arquivo "bottom.md" com o conteúdo que fica após o índice. O script checa por subdiretórios e arquivos dentro do diretório blog, gera um índice e após isso concatena os três arquivos (top.md, blog.md e bottom.md) gerando um arquivo só que será convertido em html.
 
-Criei duas funções que são utilizadas após converter o arquivo em html. A função header cria o início da página baseada no nome do arquivo que informei no comando e a função bottom fecha as tags necessárias.
+Duas funções foram criadas. Uma para escrever o início do documento html e outra para fechar o código da página. Não era necessário utilizar funções, pois são invocadas apenas uma vez. Fiz para facilitar a visualização e manutenção.
 
-    header() {
-        echo "<!DOCTYPE html>" > $filename.html
-        { echo "<html>"; echo "<head>"; } >> $filename.html
-        if [ -z "$1" ]; then
-            echo "No title supplied. Using name of the file." >&2
-            echo "  <title>$filename</title>" >> $filename.html
-        else
-            echo "  <title>$1</title>" >> $filename.html
-        fi
-        { echo "  <link rel=\"stylesheet\" href=\"styles.css\">"; \
-        echo "</head>"; echo "<body>"; echo ""; } >> $filename.html
-    }
-    
-    bottom() {
-        { echo "</body>"; echo "</html>"; } >> $filename.html
-    }
+Para facilitar o processo, a hierarquia de diretórios é blog/ano/ e o nome do arquivo é "MÊSDIA - Titulo do texto.md", ficando "blog/2020/0430 - Construindo um site com bash e pandoc.md" no caso deste texto.
 
-O funcionamento é simples. O script é invocado informando um ou dois argumentos. O primeiro é o arquivo markdown a ser convertido em html e o segundo é o título que a página terá. Se o título não for informado, o script passa o nome do arquivo como tĩtulo.
-É algo bem simples, mas por enquanto está servindo bem ao propósito.
-
-O próximo passo foi criar outro script para automatizar o índice da seção [blog](/blog.html) do site. Sempre  que eu escrever algo novo é só rodar o script para gerar um novo índice.
-Para facilitar o processo, a hierarquia de diretórios ficou como blog/ano e o nome do arquivo é MÊSDIA - Titulo do texto.md, ficando blog/2020/0423 - Construindo um site com bash e pandoc.md no caso deste texto.
-
-O script executa um loop passando pelos diretórios e seus arquivos gerando uma linha para cada arquivo html contido na pasta e formatando como lista em um arquivo markdown.
+O script executa um loop passando pelos diretórios e checa se existe um arquivo .md e outro .html com o mesmo nome. Caso não exista, ele converte o arquivo markdown em html. Após esta checagem, é gerada uma linha para cada arquivo .md contido no diretório e formatado como lista em um arquivo temporário "tmp.md" em markdown.
 
 Segue o trecho do loop:
 
-    if [ -d "$SRC/blog" ]; then
-        for f1 in "$SRC/blog/"*; do
-           nf="${f1: -4}"
-           for f2 in "$SRC/blog/$nf/"*.md;
-               l2a=$(echo $f2 | sed 's:.*/::')
-               l2b="${l2a::-5}"
-               printf -- "- %s/[%s](blog/%s/%s)\n" "$nf" "$l2b" "$nf" "$l2a"
-           done
+    blog () {
+            if [ -f "$f2" ] && [ ! -f "${f2::-3}.html" ]; then
+                pandoc -o "${f2::-3}.html" "$f2"
+            fi
+            l1=$(echo "${f2::-3}" | sed 's:.*/::')
+            printf -- "- %s/[%s](%s)\n" "$y" "$l1" "${f2::-3}.html" >> tmp.md
+    }
+    
+    for f1 in "blog/"*; do
+        y="${f1: -4}"
+        for f2 in "blog/$y/"*.md; do
+            blog
         done
-        tac $tmp > $filename
-    else
-        exit 1
-    fi
+    done
 
-Primeiro o trecho checa se o diretório blog/ existe e executa um loop em cada diretório existente dentro.
+O loop "for" do trecho acima checa o conteúdo do diretório blog. Seu conteúdo são subdiretórios referentes aos anos. A variável "y" guarda o valor (2019, 2020, ...) e outro loop "for" é invocado dentro do diretório do ano (blog/$y), checa por arquivos .md e executa a função "blog" para cada arquivo .md encontrado.
+Esta é a função que checa se existe um arquivo .md e outro .html com o mesmo nome e gera o .html caso não exista. Após isso é criada uma linha de índice em markdown com o nome e link para o artigo em um arquivo temporário "tmp.md".
 
-Como o processo retorna o caminho absoluto (dir1/dir2/.../blog/2020) eu utilizo
+Algo interessante em bash é a seguinte sintaxe:
 
-    nf="${f1: -4}"
+    y="${f1: -4}"
 
-para manter os últimos 4 caracteres do resultado, no caso os anos (2019, 2020).
+Isso faz com que seja utilizado somente os 4 últimos caracteres da string. No caso a string é "blog/2020", mas a variável guarda somente o valor "2020".
 
-Após isso outro loop se inicia ciclando dentro do diretório de cada ano (variável nf) coletando o resultado, que também retorna caminho absoluto (dir1/.../blog/2020/0423 - Nome.html), portanto utilizo sed para remover todos os caracteres até a última "/", incluindo esta, resultando em 0423 - Nome.html onde atribuo a variável l2a.
+Caso queira o resultado inverso, removendo os caracteres, basta acrescenter dois pontos. É o que faço aqui: 
 
-Por fim crio outra variável com o nome do arquivo utilizando
+    "${f2::-3}"
 
-    l2b="${l2a::-5}"
+O "::-3" remove os últimos 3 caracteres (.md), ficando somente com o nome do arquivo, sem sua extensão.
 
-e com o ::-5 removo os últimos 5 caracteres (.html) para utilizar como texto no índice.
+O comando printf escreve tudo formatado em índice markdown precedido por hífen.
 
-O comando printf escreve tudo formatado:
+    printf -- "- %s/[%s](%s)\n" "$y" "$l1" "${f2::-3}.html" >> tmp.md
 
-    printf -- "- %s/[%s](blog/%s/%s)\n" "$nf" "$l2b" "$nf" "$l2a"
+No final do processo utilizo o comando tac (o inverso de cat) para inverter o conteúdo do arquivo "tmp.md", gerando o "blog.md" com as postagens mais recentes no topo, deixando o índice melhor organizado.
 
-Criando um índice de formato markdown, precedido por hífen.
+Tudo é concatenado em um arquivo "index.md" e convertido em "tmp.html", gerando todo o conteúdo visível da página inicial. A função "header" gera o início código html, o arquivo "tmp.html" é inserido após esse código e a função "bottom" fecha o código, finalizando o arquivo "index.html". Por fim, o arquivo "tmp.html" é removido.
 
-No final do processo utilizo o comando tac (o inverso de cat) para inverter a ordem fazendo com que as postagens mais recentes fiquem no topo, deixando o índice melhor organizado.
+O resultado final você já visualizou antes de entrar nesta página.
 
-Deixei tudo muito simples e o formato final você já visualizou antes de entrar nesta página.
-
-Você pode ver e baixar os scripts no meu [repositório](https://github.com/crdpa/bsgs).
+Você pode visualizar e baixar o script no [repositório](https://github.com/crdpa/bsg).
