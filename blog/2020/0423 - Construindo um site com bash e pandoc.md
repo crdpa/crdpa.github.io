@@ -19,7 +19,11 @@ Segue o trecho do loop:
 
     blog () {
             if [ -f "$f2" ] && [ ! -f "${f2::-3}.html" ]; then
-                pandoc -o "${f2::-3}.html" "$f2"
+                pandoc -o "${f2::-3}.tmp.html" "$f2"
+                header > "${f2::-3}.html"
+                cat "${f2::-3}.tmp.html" >> "${f2::-3}.html"
+                bottom >> "${f2::-3}.html"
+                rm "${f2::-3}.tmp.html"
             fi
             l1=$(echo "${f2::-3}" | sed 's:.*/::')
             printf -- "- %s/[%s](%s)\n" "$y" "$l1" "${f2::-3}.html" >> tmp.md

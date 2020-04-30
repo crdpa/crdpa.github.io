@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>crdpa</title>
+  <link rel="stylesheet" href="/styles.css">
+ </head>
+<body>
+
 <h1 id="construindo-um-site-com-bash-e-pandoc">Construindo um site com bash e pandoc</h1>
 <h2 id="section">30/04/2020</h2>
 <p>Há tempos venho alimentando a idéia de criar um site pequeno para escrever textos com informações que adquiro ao longo do tempo, mas sempre acabo deixando de lado. Agora, em meio a essa pandemia e isolamento, resolvi deixar a preguiça de lado.</p>
@@ -10,7 +21,11 @@
 <p>Segue o trecho do loop:</p>
 <pre><code>blog () {
         if [ -f &quot;$f2&quot; ] &amp;&amp; [ ! -f &quot;${f2::-3}.html&quot; ]; then
-            pandoc -o &quot;${f2::-3}.html&quot; &quot;$f2&quot;
+            pandoc -o &quot;${f2::-3}.tmp.html&quot; &quot;$f2&quot;
+            header &gt; &quot;${f2::-3}.html&quot;
+            cat &quot;${f2::-3}.tmp.html&quot; &gt;&gt; &quot;${f2::-3}.html&quot;
+            bottom &gt;&gt; &quot;${f2::-3}.html&quot;
+            rm &quot;${f2::-3}.tmp.html&quot;
         fi
         l1=$(echo &quot;${f2::-3}&quot; | sed &#39;s:.*/::&#39;)
         printf -- &quot;- %s/[%s](%s)\n&quot; &quot;$y&quot; &quot;$l1&quot; &quot;${f2::-3}.html&quot; &gt;&gt; tmp.md
@@ -35,3 +50,5 @@ done</code></pre>
 <p>Tudo é concatenado em um arquivo “index.md” e convertido em “tmp.html”, gerando todo o conteúdo visível da página inicial. A função “header” gera o início código html, o arquivo “tmp.html” é inserido após esse código e a função “bottom” fecha o código, finalizando o arquivo “index.html”. Por fim, o arquivo “tmp.html” é removido.</p>
 <p>O resultado final você já visualizou antes de entrar nesta página.</p>
 <p>Você pode visualizar e baixar o script no <a href="https://github.com/crdpa/bsg">repositório</a>.</p>
+</body>
+</html>
