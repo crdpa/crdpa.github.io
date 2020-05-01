@@ -64,3 +64,5 @@ Tudo é concatenado em um arquivo "index.md" e convertido em "tmp.html", gerando
 O resultado final você já visualizou antes de entrar nesta página.
 
 Você pode visualizar e baixar o script no [repositório](https://github.com/crdpa/bsg).
+
+[< Voltar](/index.html)
