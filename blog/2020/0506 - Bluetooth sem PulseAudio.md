@@ -9,7 +9,7 @@ Antes de instalar mais uma camada de abstração no meu laptop para usar algo qu
 Foi nessa busca que encontrei o [BlueZ-Alsa](https://github.com/Arkq/bluez-alsa). O projeto foi criado para manter a integração entre Alsa e BlueZ que foi retirada com o lançamento da versão 5.
 Como estou utilizando a distribuição Void Linux, o artigo será focado na mesma, porém adaptando alguns detalhes deve funcionar normalmente em qualquer uma.
 
-Primeiro será necessário instalar os pacotes bluez e bluez-alsa e ativar seus serviços com na inicialização do sistema. Void Linux não utiliza systemd, portando os comandos são diferentes, mas no caso de outras distribuições basta pesquisar como habilitar os serviços.
+Primeiro será necessário instalar os pacotes bluez e bluez-alsa e ativar seus serviços com na inicialização do sistema. Void Linux não utiliza systemd, portanto os comandos são diferentes, mas no caso de outras distribuições basta pesquisar como habilitar os serviços.
 
     ln -s /etc/sv/bluetoothd /var/service/
     ln -s /etc/sv/bluez-alsa /var/service/
@@ -54,7 +54,7 @@ Será necessário criar o arquivo ".asoundrc" no diretório raiz do seu usuário
     	}
     }
 
-No lugar de "pcm.bluetooth" recomendo utilizar o nome do seu dispositivo, pois será a referência para se conectar. No meu caso, a caixa de som é da marca Anker, portando coloquei "pcm.anker".
+No lugar de "pcm.bluetooth" recomendo utilizar o nome do seu dispositivo, pois será a referência. No meu caso a caixa de som é da marca Anker, portanto coloquei "pcm.anker".
 
 Reinicie o computador para que o sistema aplique as configurações que inserimos no arquivo ".asoundrc".
 
