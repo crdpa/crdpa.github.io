@@ -69,3 +69,5 @@ Com o PulseAudio e um aplicativo como o Blueman, as coisas ficam muito mais simp
 O Alsa não funciona muito bem neste tipo de caso. Encontrei alguns hacks para fazer isso funcionar, mas nada satisfatório.
 
 Caso fazer essa mudança manual seja um problema, infelizmente a melhor opção é jogar a toalha e instalar o PulseAudio. No final das contas, foi o que eu fiz.
+
+[< Voltar](/index.html)
