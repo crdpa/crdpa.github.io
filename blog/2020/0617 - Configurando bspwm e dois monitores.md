@@ -56,4 +56,6 @@ Não é algo que faço. Ou ligo o computador com o monitor externo já conectado
 Se no futuro isso se tornar um problema, pesquiso como resolver e crio outro artigo aqui.
 
 Screenshot obrigatório do setup concluído:
+
+
  [![](/blog/2020/0618tiny.png)](/blog/2020/0618.png)
