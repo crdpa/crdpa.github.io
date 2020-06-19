@@ -1,7 +1,7 @@
 # Configurando bspwm e dois monitores
 ## 18/06/2020
 
-Preciso configurar meu gerenciador de janelas para utilizar dois monitores e por um bom tempo venho empurrando isso com a barriga e utilizando só o monitor do laptop ou só o monitor externo.
+Preciso configurar meu gerenciador de janelas para utilizar dois monitores e por um bom tempo venho empurrando isso com a barriga utilizando somente o monitor do laptop ou só o monitor externo.
 
 Hoje resolvi mudar isso e documentar aqui toda a empreitada.
 
@@ -13,7 +13,7 @@ O comando para ativar o monitor externo, definir como primário e colocar ao lad
 
 Assim, quando eu saio com o mouse para a esquerda do monitor do laptop, ele aparece no monitor externo.
 
-Bspwm é um gerenciador de janelas configurado por comandos externos utilizando o cliente bspc e seu arquivo de inicialização é um shell script, portanto é possível fazer infinitas customizações. Criei uma condição que detecta se dois monitores estão definidos logo após iniciar o gerenciador. Caso seja encontrado dois monitores, é executado a configuração para dois, senão a configuração é feita para um monitor só.
+Bspwm é um gerenciador de janelas configurado por comandos externos utilizando o cliente bspc e seu arquivo de inicialização é um shell script, portanto é possível fazer infinitas customizações. Criei uma condição que detecta se dois monitores estão definidos logo após iniciar o gerenciador. Caso seja encontrado dois monitores, é executada a configuração para dois, senão a configuração é feita para um monitor somente.
 
     # checa se existem dois monitores definidos
     MON=$(xrandr --listmonitors | grep Monitors | cut -b 11-)
@@ -51,11 +51,11 @@ No script de execução do polybar, bastou colocar isso:
 
 O resultado ficou satisfatório, mas existe um problema. Caso eu resolva desconectar ou conectar o monitor externo com o BSPWM rodando, tudo vira uma bagunça.
 
-Não é algo que faço. Ou ligo o computador com o monitor externo já conectado ou não e caso venha a fazer de outra maneira, reinicio o Xorg. Pelo pouco que olhei, seria necessário monitorar eventos no udev e reagir. Fiz algumas tentativas, mas as coisas ficaram meio bizarras.
+Não é algo que faço. Ou ligo o computador com o monitor externo já conectado ou não. Caso venha a fazer de outra maneira, reinicio o Xorg. Pelo pouco que olhei, seria necessário monitorar eventos no udev e reagir. Fiz algumas tentativas, mas as coisas ficaram meio bizarras.
 
 Se no futuro isso se tornar um problema, pesquiso como resolver e crio outro artigo aqui.
 
 Screenshot obrigatório do setup concluído:
 
 
- [![](/blog/2020/0618tiny.png)](/blog/2020/0618.png)
+[![](/blog/2020/0618tiny.png)](/blog/2020/0618.png)
