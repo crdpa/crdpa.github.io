@@ -17,7 +17,7 @@ O script executa um loop passando pelos diretórios e checa se existe um arquivo
 
 Segue o trecho do loop:
 
-``` {.bash .numberLines}
+``` {.bash}
 blog () {
         if [ -f "$f2" ] && [ ! -f "${f2::-3}.html" ]; then
             pandoc -o "${f2::-3}.tmp.html" "$f2"
