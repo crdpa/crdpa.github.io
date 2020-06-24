@@ -17,26 +17,28 @@ O script executa um loop passando pelos diretórios e checa se existe um arquivo
 
 Segue o trecho do loop:
 
-    blog () {
-            if [ -f "$f2" ] && [ ! -f "${f2::-3}.html" ]; then
-                pandoc -o "${f2::-3}.tmp.html" "$f2"
-                {
-                    header
-                    cat "${f2::-3}.tmp.html"
-                    bottom
-                } > "${f2::-3}.html"
-                rm "${f2::-3}.tmp.html"
-            fi
-            l1=$(echo "${f2::-3}" | sed 's:.*/::')
-            printf -- "- %s/[%s](%s)\n" "$y" "$l1" "${f2::-3}.html" >> tmp.md
-    }
-    
-    for f1 in "blog/"*; do
-        y="${f1: -4}"
-        for f2 in "blog/$y/"*.md; do
-            blog
-        done
+``` {.bash .numberLines}
+blog () {
+        if [ -f "$f2" ] && [ ! -f "${f2::-3}.html" ]; then
+            pandoc -o "${f2::-3}.tmp.html" "$f2"
+            {
+                header
+                cat "${f2::-3}.tmp.html"
+                bottom
+            } > "${f2::-3}.html"
+            rm "${f2::-3}.tmp.html"
+        fi
+        l1=$(echo "${f2::-3}" | sed 's:.*/::')
+        printf -- "- %s/[%s](%s)\n" "$y" "$l1" "${f2::-3}.html" >> tmp.md
+}
+
+for f1 in "blog/"*; do
+    y="${f1: -4}"
+    for f2 in "blog/$y/"*.md; do
+        blog
     done
+done
+```
 
 O loop "for" do trecho acima checa o conteúdo do diretório blog. Seu conteúdo são subdiretórios referentes aos anos. A variável "y" guarda o valor (2019, 2020, ...) e outro loop "for" é invocado dentro do diretório do ano (blog/$y), checa por arquivos .md e executa a função "blog" para cada arquivo .md encontrado.
 Esta é a função que checa se existe um arquivo .md e outro .html com o mesmo nome e gera o .html caso não exista. Após isso é criada uma linha de índice em markdown com o nome e link para o artigo em um arquivo temporário "tmp.md".

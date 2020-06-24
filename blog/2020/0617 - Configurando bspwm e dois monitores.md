@@ -15,17 +15,19 @@ Assim, quando eu saio com o mouse para a esquerda do monitor do laptop, ele apar
 
 Bspwm é um gerenciador de janelas configurado por comandos externos utilizando o cliente bspc e seu arquivo de inicialização é um shell script, portanto é possível fazer infinitas customizações. Criei uma condição que detecta se dois monitores estão definidos logo após iniciar o gerenciador. Caso seja encontrado dois monitores, é executada a configuração para dois, senão a configuração é feita para um monitor somente.
 
-    # checa se existem dois monitores definidos
-    MON=$(xrandr --listmonitors | grep Monitors | cut -b 11-)
-    
-    # caso tenha, executa o setup para dois
-    if [[ $MON == 2 ]] ; then
-        xrandr --output HDMI1 --primary --left-of eDP1 --auto &
-        bspc monitor HDMI1 -d 1 2 3 4
-        bspc monitor eDP1 -d 5 6 7 8
-    else
-        bspc monitor eDP1 -d 1 2 3 4 5 6 7 8
-    fi
+``` {.bash}
+# checa se existem dois monitores definidos
+MON=$(xrandr --listmonitors | grep Monitors | cut -b 11-)
+
+# caso tenha, executa o setup para dois
+if [[ $MON == 2 ]] ; then
+    xrandr --output HDMI1 --primary --left-of eDP1 --auto &
+    bspc monitor HDMI1 -d 1 2 3 4
+    bspc monitor eDP1 -d 5 6 7 8
+else
+    bspc monitor eDP1 -d 1 2 3 4 5 6 7 8
+fi
+```
     
 O setup para dois monitores define quatro áreas de trabalho para cada monitor, ficando as áreas cinco a oito no laptop.
 
@@ -33,21 +35,23 @@ Agora é hora de criar um script para a barra de informações (polybar). Eu que
 
 No script de execução do polybar, bastou colocar isso:
 
-    # termina qualquer instância do programa que esteja rodando 
-    pkill polybar
-     
-    # variável guarda a quantidade de monitores
-    MONS=$(polybar --list-monitors | wc -l)
-    
-    # caso tenha dois, execute as duas barras
-    # A bar1 é a barra com mais informações. Ela irá para o monitor
-    # externo (HDMI1) caso ele esteja conectado.
-    if [[ "$MONS" == "2" ]] ; then
-        MON1=HDMI1 polybar --reload bar1 &
-        MON2=eDP1 polybar --reload bar2 &
-    else
-        MON1=eDP1 polybar --reload bar1 &
-    fi
+``` {.bash}
+# termina qualquer instância do programa que esteja rodando 
+pkill polybar
+ 
+# variável guarda a quantidade de monitores
+MONS=$(polybar --list-monitors | wc -l)
+
+# caso tenha dois, execute as duas barras
+# A bar1 é a barra com mais informações. Ela irá para o monitor
+# externo (HDMI1) caso ele esteja conectado.
+if [[ "$MONS" == "2" ]] ; then
+    MON1=HDMI1 polybar --reload bar1 &
+    MON2=eDP1 polybar --reload bar2 &
+else
+    MON1=eDP1 polybar --reload bar1 &
+fi
+```
 
 O resultado ficou satisfatório, mas existe um problema. Caso eu resolva desconectar ou conectar o monitor externo com o BSPWM rodando, tudo vira uma bagunça.
 

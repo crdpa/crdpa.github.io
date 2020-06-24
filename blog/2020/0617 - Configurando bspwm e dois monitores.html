@@ -18,35 +18,35 @@
 <pre><code>xrandr --output HDMI1 --primary --left-of eDP1 --auto</code></pre>
 <p>Assim, quando eu saio com o mouse para a esquerda do monitor do laptop, ele aparece no monitor externo.</p>
 <p>Bspwm é um gerenciador de janelas configurado por comandos externos utilizando o cliente bspc e seu arquivo de inicialização é um shell script, portanto é possível fazer infinitas customizações. Criei uma condição que detecta se dois monitores estão definidos logo após iniciar o gerenciador. Caso seja encontrado dois monitores, é executada a configuração para dois, senão a configuração é feita para um monitor somente.</p>
-<pre><code># checa se existem dois monitores definidos
-MON=$(xrandr --listmonitors | grep Monitors | cut -b 11-)
-
-# caso tenha, executa o setup para dois
-if [[ $MON == 2 ]] ; then
-    xrandr --output HDMI1 --primary --left-of eDP1 --auto &amp;
-    bspc monitor HDMI1 -d 1 2 3 4
-    bspc monitor eDP1 -d 5 6 7 8
-else
-    bspc monitor eDP1 -d 1 2 3 4 5 6 7 8
-fi</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co"># checa se existem dois monitores definidos</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="va">MON=$(</span><span class="ex">xrandr</span> --listmonitors <span class="kw">|</span> <span class="fu">grep</span> Monitors <span class="kw">|</span> <span class="fu">cut</span> -b 11-<span class="va">)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="co"># caso tenha, executa o setup para dois</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="kw">if [[</span> <span class="va">$MON</span> <span class="ot">==</span> 2<span class="kw"> ]]</span> ; <span class="kw">then</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>    <span class="ex">xrandr</span> --output HDMI1 --primary --left-of eDP1 --auto <span class="kw">&amp;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>    <span class="ex">bspc</span> monitor HDMI1 -d 1 2 3 4</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>    <span class="ex">bspc</span> monitor eDP1 -d 5 6 7 8</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="kw">else</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    <span class="ex">bspc</span> monitor eDP1 -d 1 2 3 4 5 6 7 8</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a><span class="kw">fi</span></span></code></pre></div>
 <p>O setup para dois monitores define quatro áreas de trabalho para cada monitor, ficando as áreas cinco a oito no laptop.</p>
 <p>Agora é hora de criar um script para a barra de informações (polybar). Eu quero que apareçam uma barra diferente em cada monitor. Toda a informação necessária como carga da bateria, relógio, conexão de internet e temperatura ficam no monitor principal. No caso de estar utilizando só o notebook, quero as informações nele, mas se estiver com o monitor externo, quero as informações no monitor externo e a barra no laptop só com o nome das áreas de trabalho.</p>
 <p>No script de execução do polybar, bastou colocar isso:</p>
-<pre><code># termina qualquer instância do programa que esteja rodando 
-pkill polybar
- 
-# variável guarda a quantidade de monitores
-MONS=$(polybar --list-monitors | wc -l)
-
-# caso tenha dois, execute as duas barras
-# A bar1 é a barra com mais informações. Ela irá para o monitor
-# externo (HDMI1) caso ele esteja conectado.
-if [[ &quot;$MONS&quot; == &quot;2&quot; ]] ; then
-    MON1=HDMI1 polybar --reload bar1 &amp;
-    MON2=eDP1 polybar --reload bar2 &amp;
-else
-    MON1=eDP1 polybar --reload bar1 &amp;
-fi</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="co"># termina qualquer instância do programa que esteja rodando </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="ex">pkill</span> polybar</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a><span class="co"># variável guarda a quantidade de monitores</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="va">MONS=$(</span><span class="ex">polybar</span> --list-monitors <span class="kw">|</span> <span class="fu">wc</span> -l<span class="va">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a><span class="co"># caso tenha dois, execute as duas barras</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="co"># A bar1 é a barra com mais informações. Ela irá para o monitor</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="co"># externo (HDMI1) caso ele esteja conectado.</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a><span class="kw">if [[</span> <span class="st">&quot;</span><span class="va">$MONS</span><span class="st">&quot;</span> <span class="ot">==</span> <span class="st">&quot;2&quot;</span><span class="kw"> ]]</span> ; <span class="kw">then</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>    <span class="va">MON1=</span>HDMI1 <span class="ex">polybar</span> --reload bar1 <span class="kw">&amp;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>    <span class="va">MON2=</span>eDP1 <span class="ex">polybar</span> --reload bar2 <span class="kw">&amp;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a><span class="kw">else</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>    <span class="va">MON1=</span>eDP1 <span class="ex">polybar</span> --reload bar1 <span class="kw">&amp;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a><span class="kw">fi</span></span></code></pre></div>
 <p>O resultado ficou satisfatório, mas existe um problema. Caso eu resolva desconectar ou conectar o monitor externo com o BSPWM rodando, tudo vira uma bagunça.</p>
 <p>Não é algo que faço. Ou ligo o computador com o monitor externo já conectado ou não. Caso venha a fazer de outra maneira, reinicio o Xorg. Pelo pouco que olhei, seria necessário monitorar eventos no udev e reagir. Fiz algumas tentativas, mas as coisas ficaram meio bizarras.</p>
 <p>Se no futuro isso se tornar um problema, pesquiso como resolver e crio outro artigo aqui.</p>

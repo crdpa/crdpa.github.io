@@ -19,26 +19,26 @@
 <p>Para facilitar o processo, a hierarquia de diretórios é blog/ano/ e o nome do arquivo é “MÊSDIA - Titulo do texto.md”, ficando “blog/2020/0430 - Construindo um site com bash e pandoc.md” no caso deste texto.</p>
 <p>O script executa um loop passando pelos diretórios e checa se existe um arquivo .md e outro .html com o mesmo nome. Caso não exista, ele converte o arquivo markdown em html. Após esta checagem, é gerada uma linha para cada arquivo .md contido no diretório e formatado como lista em um arquivo temporário “tmp.md” em markdown.</p>
 <p>Segue o trecho do loop:</p>
-<pre><code>blog () {
-        if [ -f &quot;$f2&quot; ] &amp;&amp; [ ! -f &quot;${f2::-3}.html&quot; ]; then
-            pandoc -o &quot;${f2::-3}.tmp.html&quot; &quot;$f2&quot;
-            {
-                header
-                cat &quot;${f2::-3}.tmp.html&quot;
-                bottom
-            } &gt; &quot;${f2::-3}.html&quot;
-            rm &quot;${f2::-3}.tmp.html&quot;
-        fi
-        l1=$(echo &quot;${f2::-3}&quot; | sed &#39;s:.*/::&#39;)
-        printf -- &quot;- %s/[%s](%s)\n&quot; &quot;$y&quot; &quot;$l1&quot; &quot;${f2::-3}.html&quot; &gt;&gt; tmp.md
-}
-
-for f1 in &quot;blog/&quot;*; do
-    y=&quot;${f1: -4}&quot;
-    for f2 in &quot;blog/$y/&quot;*.md; do
-        blog
-    done
-done</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">blog ()</span> <span class="kw">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>        <span class="kw">if</span><span class="bu"> [</span> <span class="ot">-f</span> <span class="st">&quot;</span><span class="va">$f2</span><span class="st">&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">&quot;</span><span class="va">${f2::-3}</span><span class="st">.html&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>            <span class="ex">pandoc</span> -o <span class="st">&quot;</span><span class="va">${f2::-3}</span><span class="st">.tmp.html&quot;</span> <span class="st">&quot;</span><span class="va">$f2</span><span class="st">&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>            <span class="kw">{</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>                <span class="ex">header</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>                <span class="fu">cat</span> <span class="st">&quot;</span><span class="va">${f2::-3}</span><span class="st">.tmp.html&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>                <span class="ex">bottom</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>            <span class="kw">}</span> <span class="op">&gt;</span> <span class="st">&quot;</span><span class="va">${f2::-3}</span><span class="st">.html&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>            <span class="fu">rm</span> <span class="st">&quot;</span><span class="va">${f2::-3}</span><span class="st">.tmp.html&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>        <span class="kw">fi</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>        <span class="va">l1=$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${f2::-3}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s:.*/::&#39;</span><span class="va">)</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>        <span class="bu">printf</span> -- <span class="st">&quot;- %s/[%s](%s)\n&quot;</span> <span class="st">&quot;</span><span class="va">$y</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$l1</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${f2::-3}</span><span class="st">.html&quot;</span> <span class="op">&gt;&gt;</span> tmp.md</span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="kw">}</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="kw">for</span> <span class="ex">f1</span> in <span class="st">&quot;blog/&quot;</span>*<span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="va">y=</span><span class="st">&quot;</span><span class="va">${f1: -4}</span><span class="st">&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="kw">for</span> <span class="ex">f2</span> in <span class="st">&quot;blog/</span><span class="va">$y</span><span class="st">/&quot;</span>*.md<span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>        <span class="ex">blog</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="kw">done</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">done</span></span></code></pre></div>
 <p>O loop “for” do trecho acima checa o conteúdo do diretório blog. Seu conteúdo são subdiretórios referentes aos anos. A variável “y” guarda o valor (2019, 2020, …) e outro loop “for” é invocado dentro do diretório do ano (blog/$y), checa por arquivos .md e executa a função “blog” para cada arquivo .md encontrado. Esta é a função que checa se existe um arquivo .md e outro .html com o mesmo nome e gera o .html caso não exista. Após isso é criada uma linha de índice em markdown com o nome e link para o artigo em um arquivo temporário “tmp.md”.</p>
 <p>Algo interessante em bash é a seguinte sintaxe:</p>
 <pre><code>y=&quot;${f1: -4}&quot;</code></pre>
