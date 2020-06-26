@@ -11,13 +11,13 @@ img {
 @font-face {
     font-family: Hermit;
     src: url("../crdpa.github.io/Hermit-Regular.otf") format('opentype');
-    font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: Hermit;
     src: url("../crdpa.github.io/Hermit-Bold.otf") format('opentype');
+    font-weight: bold;
     font-style: normal;
 }
 
