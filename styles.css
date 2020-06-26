@@ -8,8 +8,21 @@ img {
           height: auto ;
 }
 
+@font-face {
+    font-family: Hermit;
+    src: url("../crdpa.github.io/Hermit-Regular.otf") format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Hermit;
+    src: url("../crdpa.github.io/Hermit-Bold.otf") format('opentype');
+    font-style: normal;
+}
+
 body {
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, monospace, monospace;
+    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, monospace, monospace;
     font-size: 16px;
     line-height: 1.4;
     margin: 40px auto;
