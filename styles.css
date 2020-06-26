@@ -55,6 +55,12 @@ a:visited {
 
 blockquote {
     border-left: 1px solid #cccccc;
+    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, monospace, monospace;
+}
+
+code {
+    background-color:#EEEEEE;
+    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, monospace, monospace;
 }
 
 ul {
