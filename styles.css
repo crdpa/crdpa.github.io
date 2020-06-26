@@ -22,7 +22,7 @@ img {
 }
 
 body {
-    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, monospace, monospace;
+    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, Consolas, Monaco, Lucida Console, monospace, monospace;
     font-size: 16px;
     line-height: 1.4;
     margin: 40px auto;
@@ -55,12 +55,12 @@ a:visited {
 
 blockquote {
     border-left: 1px solid #cccccc;
-    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, monospace, monospace;
+    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, Consolas, Monaco, Lucida Console, monospace, monospace;
 }
 
 code {
     background-color:#EEEEEE;
-    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, monospace, monospace;
+    font-family: Hermit, Liberation Mono, DejaVu Sans Mono, Consolas, Monaco, Lucida Console, monospace, monospace;
 }
 
 ul {
