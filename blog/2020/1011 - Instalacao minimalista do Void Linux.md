@@ -2,28 +2,28 @@
 ## 11/10/2020
 
 Este guia é um passo a passo de como instalar a distribuição Void Linux de maneira manual e bastante enxuta. É um meio alternativo de se instalar e selecionar a dedo cada componente que fará parte do seu sistema.
-Quando me aventurei no Linux pela primeira vez, com o Mandrake, sempre tive a sensação de que o sistema era  um pouco cheio de pacotes e softwares redundantes. Isso vem da época que as distribuições vinham em vários CDs. Atẽ que um dia me deparei com Slackare e comecei a entender como tudo funcionava por baixo dos panos.
-Anos se passaram e com toda a experiência adquirida, finalmente achei meu lar na distribuição Gentoo. Como vocês devem saber, o Gentoo da um bocado de trabalho pra instalar e manter, mas depois que se pega o jeito você acaba atẽ adquirindo certo apego, pois conhece tudo no seu sistema e sabe exatamente como e porque as coisas funcionam.
-Um belo dia acabei formatando sem querer a partição onde o Gentoo estava instalado e não tinha backup. A idéia de começar tudo do zero, configurar e recompilar o kernel, me deixou extremamente desanimado.
+Quando me aventurei no Linux pela primeira vez, com o Mandrake, sempre tive a sensação de que o sistema era  um pouco cheio de pacotes e softwares redundantes. Isso vem da época que as distribuições vinham em vários CDs. Até que um dia me deparei com Slackware e comecei a entender como tudo funcionava por baixo dos panos.
+Anos se passaram e com toda a experiência adquirida, finalmente achei meu lar na distribuição Gentoo. Como vocês devem saber, o Gentoo da um bocado de trabalho pra instalar e manter, mas depois que se pega o jeito você acaba até adquirindo um certo apego, pois conhece tudo no seu sistema e sabe exatamente como e porque as coisas funcionam.
+Um certo dia acabei formatando sem querer a partição onde o Gentoo estava instalado e não havia nenhum backup. A idéia de começar tudo do zero, configurar e recompilar o kernel, me deixou extremamente desanimado.
 Foi aí que me deparei com o Void Linux.
 
-Simples, minimalista, rápido e sem necessidade de configurar o pr;oprio kernel. Depois de instalado, não senti a mínima vontade de voltar para o Gentoo, apesar de ainda me passar pela cabeça uma ou duas vezes ao ano.
-Eu pensei até que estaria aos poucos abandonando essa idéia de ter um sistema minimalista e simplificado. Então tentei algumas vezes migrar para distribuições mais automatizadas como Manjaro ou Fedora, mas é só utilizar por uma ou duas semanas que acabo voltando pro Void.
-Eu sempre fico com aquela sensação de falta de controle das coisas. Onde tudo acontece nos bastidores, um monte de pacote e software desnecessário instalados, serviços demais rodando, pra fazer exatamente a mesma coisa que eu fazia no Void (ou Gentoo) de maneira mais rápida e utilizando menos recursos.
+Simples, minimalista, rápido e sem necessidade de configurar o próprio kernel. Não senti a mínima vontade de voltar para o Gentoo, apesar de ainda me passar pela cabeça uma ou duas vezes no ano.
+Eu pensei até que estaria aos poucos abandonando essa idéia de ter um sistema minimalista e simplificado. O que me fez algumas vezes migrar para distribuições mais automatizadas como Manjaro ou Fedora, mas após utilizar por duas ou três semanas acabo voltando para o Void.
+Eu sempre fico com aquela sensação de falta de controle das coisas. Onde tudo acontece nos bastidores, um monte de pacotes e softwares desnecessários são instalados, serviços demais rodando, pra fazer exatamente a mesma coisa que eu fazia no Void (ou Gentoo) de maneira mais rápida e utilizando menos recursos.
 
-Já ficou claro que esse é um texto/guia bem particular. Não significa que essa seja a maneira certa de se manter um computador e sistema operacional e que utilizar Fedora ou Ubuntu ou Manjaro signifique que você não tenha controle do seu sistema. Pelo contrário. Acredito que a maioria dos administradores de sistemas Linux utilizam esse tipo de distribuição.
-Essa é só a maneira como cresci e me envolvi com Linux e o jeito que prefiro lidar com o sistema e o meu computador.
+Já ficou claro que esse é um texto/guia bem particular. Não significa que essa seja a maneira certa de se manter um sistema operacional e que utilizar Fedora ou Ubuntu signifique que você não tenha controle do seu sistema. Pelo contrário. Acredito que a maioria dos administradores de sistemas Linux utilizam esse tipo de distribuição.
+Essa é só a maneira como cresci e me envolvi com Linux e como prefiro lidar com o meu computador.
 
-Caso você prefira instalar rapidamente e já ter tudo pronto pra utilizar, esse guia não é para você. Esse guia assume que você tem alguns conhecimentos básicos de Linux.
+Caso você prefira instalar rapidamente e já ter tudo pronto para utilizar, esse guia não é para você. Esse texto assume que você tem alguns conhecimentos básicos de Linux.
 
 ## Formatando e particionando
 
-Eu prefiro utilizar outra distribuição para instalar o Void Linux, pois apesar das isos do Void serem suficiente, prefiro ter um sistema mais completo e automatizado para fazer outras coisas enquanto instalo e também para não correr riscos de faltar algum software especĩfico. Pode ser Fedora, Ubuntu, Manjaro ou mesmo o Void Linux, fica a seu critério.
+Eu prefiro utilizar outra distribuição para instalar o Void Linux, pois apesar das imagens do Void serem suficiente, gosto de ter um sistema mais completo e automatizado para fazer outras coisas enquanto instalo e também para não correr riscos de faltar algum software especĩfico. Pode ser Fedora, Ubuntu, Manjaro ou mesmo o Void Linux, fica a seu critério.
 Assim que baixar a distribuição de sua escolha, crie o seu pendrive USB bootável.
 No meu caso, escolhi o Manjaro XFCE.
 
 ``` {.bash}
-dd if=manjaro-kde.iso of=/dev/sdc # /dev/sdc é o meu pendrive
+dd if=manjaro-xfce.iso of=/dev/sdc # /dev/sdc é o meu pendrive
 ```
 
 Agora é só reiniciar o computador e bootar no pendrive.
@@ -109,7 +109,7 @@ echo "ignorepkg=wpa_supplicant" >> /etc/xbps.d/10-ignore.conf
 echo "ignorepkg=dhcpcd" >> /etc/xbps.d/10-ignore.conf
 ```
 
-Instalando o sistema:
+Atualizando e instalando o sistema:
 
 ``` {.bash}
 xbps-install -Su xbps
@@ -158,7 +158,7 @@ UUID=7c29705b-086c-49b6-a1ae-3b3dbf594dde /home btrfs rw,noatime,compress=zstd:3
 UUID=7c29705b-086c-49b6-a1ae-3b3dbf594dde /snapshots btrfs rw,noatime,compress=zstd:3,ssd,space_cache,commit=120,subvolid=258,subvol=/@snaps
 UUID=e2f9d238-fc81-44ea-b2c4-11d40ee1e49c /boot ext4 defaults,noatime 0 2
 UUID=3D6A-2654 /boot/efi vfat defaults,noatime 0 2
-tmpfs           /tmp        tmpfs   defaults,nosuid,nodev   0 0
+tmpfs /tmp tmpfs defaults,nosuid,nodev 0 0
 ```
 
 ## Instalando e configurando o Grub
@@ -181,6 +181,7 @@ Como tenho placa Nvidia e Intel no laptop, adicionei nvidia-drm.modeset=1 e i915
 ``` {.bash}
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=4 slub_debug=P page_poison=1 nvidia-drm.modeset=1 i915.modeset=1"
 ```
+
 Reconfigurando dracut:
 
 ``` {.bash}
@@ -193,7 +194,7 @@ Instalando o bootloader:
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=void_grub --boot-directory=/boot --recheck --debug
 ```
 
-Caso apareça o erro "EFI variables are not supported on this system", abra um outro terminal (que irá estar fora do Void Linux) e digite:
+Caso apareça o erro "EFI variables are not supported on this system", abra um outro terminal (que estará fora do Void Linux) e digite:
 
 ``` {.bash}
 mount -B /sys/firmware/efi/efivars /mnt/sys/firmware/efi/efivars
@@ -229,6 +230,8 @@ shutdown -r now
 
 ## Configurando a internet e finalizando
 
+Remova o pendrive, ligue o computador e logue como root.
+
 Para conectar o wifi com o iwd, é necessário adicionar os serviços ao sistema.
 
 ``` {.bash}
@@ -236,7 +239,7 @@ ln -s /etc/sv/dbus /var/service/
 ln -s /etc/sv/iwd /var/service/
 ```
 
-Para utilizar o iwd você encontra vários tutoriais na internet, mas ele é muito mais estável e simples do que o wpa_supplicant. Aqui só irei ensinar como configurá-lo para utilizar o cliente dhcp interno e o openresolv.
+Para utilizar o iwd você encontra vários tutoriais na internet, ele é muito mais estável e simples do que o wpa_supplicant. Aqui só irei ensinar como configurá-lo para utilizar o cliente dhcp interno e o openresolv.
 
 Edite ou crie o arquivo /etc/iwd/main.conf e coloque:
 
@@ -272,4 +275,4 @@ ln -s /etc/sv/NetworkManager /var/service/
 
 Feito. Utilize o NetworkManager normalmente como utilizaria em qualquer outro sistema.
 
-Agora é só prosseguir normalmente, criando seu usuário (coloque ele no grupo network para poder conectar a internet e utilizar o NetworkManager), instalando os programas que quiser e por fim começar a utilizar uma das distribuições Linux mais enxutas e rápidas atualmente.
+Agora é só prosseguir normalmente, criando seu usuário (coloque ele no grupo network para poder conectar a internet e utilizar o NetworkManager). Logado no seu usuário é só se conectar à internet, instalar os programas que quiser e por fim começar a utilizar uma das distribuições Linux mais enxutas e rápidas atualmente!
