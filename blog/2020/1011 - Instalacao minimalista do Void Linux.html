@@ -172,7 +172,8 @@
 <h2 id="instalando-e-configurando-o-grub-e-outros-pacotes">Instalando e configurando o Grub e outros pacotes</h2>
 <p>Adicionaremos o módulo btrfs no dracut e também uma linha de referência ao diretório temporário:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;add_dracutmodules+=&quot;btrfs&quot;&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;tmpdir=/tmp&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span></code></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;tmpdir=&quot;/tmp&quot;&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;hostonly=&quot;yes&quot;&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span></code></pre></div>
 <p>Instale o Grub:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="ex">xbps-install</span> grub-x86_64-efi</span></code></pre></div>
 <p>Como tenho placa Nvidia e Intel no laptop, adicionei nvidia-drm.modeset=1 e i915.modeset=1 na configuração do Grub em /etc/default/grub. Pode pular esta etapa caso não tenha.</p>

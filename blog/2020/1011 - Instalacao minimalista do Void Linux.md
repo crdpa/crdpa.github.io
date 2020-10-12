@@ -178,7 +178,8 @@ Adicionaremos o módulo btrfs no dracut e também uma linha de referência ao di
 
 ``` {.bash}
 echo 'add_dracutmodules+="btrfs"' >> /etc/dracut.conf
-echo 'tmpdir=/tmp' >> /etc/dracut.conf
+echo 'tmpdir="/tmp"' >> /etc/dracut.conf
+echo 'hostonly="yes"' >> /etc/dracut.conf
 ```
 
 Instale o Grub:
