@@ -161,7 +161,7 @@ UUID=3D6A-2654 /boot/efi vfat defaults,noatime 0 2
 tmpfs           /tmp        tmpfs   defaults,nosuid,nodev   0 0
 ```
 
-# Instalando e configurando o Grub
+## Instalando e configurando o Grub
 
 Adicionaremos o módulo btrfs no dracut e também uma linha de referência ao diretório temporário:
 
@@ -214,16 +214,7 @@ xbps-install void-repo-nonfree
 xbps-install nvidia xf86-video-intel xf86-video-fbdev intel-video-accel mesa-vulkan-intel
 xbps-install xorg-minimal xf86-input-evdev
 xbps-install iwd openresolv
-```
-
-Configurando iwd para utilizar openresolv e cliente dhcp interno. Crie e edite o arquivo /etc/iwd/main.conf colocando:
-
-``` {.bash}
-[General]
-EnableNetworkConfiguration=true
-
-[Network]
-NameResolvingService=resolvconf
+xbps-install NetworkManager # caso queira utilizar o NetworkManager para conectar a internet
 ```
 
 O seu sistema está pronto para bootar. Pode instalar tudo o que quiser agora antes de reiniciar. Fica a seu critério.
@@ -236,6 +227,7 @@ umount -R /mnt
 shutdown -r now
 ```
 
+## Configurando a internet e finalizando
 
 Para conectar o wifi com o iwd, é necessário adicionar os serviços ao sistema.
 
@@ -257,12 +249,6 @@ NameResolvingService=resolvconf
 ```
 
 Se for utilizar o NetworkManager para conectar a internet, ele também pode ser configurado para utilizar o iwd e openresolv.
-
-Instalando:
-
-``` {.bash}
-xbps-install NetworkManager
-```
 
 Crie um arquivo em /etc/NetworkManager/conf.d/ com o nome de sua preferência, como rc-manager.conf por exemplo, e coloque:
 

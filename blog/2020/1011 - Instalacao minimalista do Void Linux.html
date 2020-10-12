@@ -158,7 +158,7 @@
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="va">UUID=</span>e2f9d238-fc81-44ea-b2c4-11d40ee1e49c <span class="ex">/boot</span> ext4 defaults,noatime 0 2</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a><span class="va">UUID=</span>3D6A-2654 <span class="ex">/boot/efi</span> vfat defaults,noatime 0 2</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a><span class="ex">tmpfs</span>           /tmp        tmpfs   defaults,nosuid,nodev   0 0</span></code></pre></div>
-<h1 id="instalando-e-configurando-o-grub">Instalando e configurando o Grub</h1>
+<h2 id="instalando-e-configurando-o-grub">Instalando e configurando o Grub</h2>
 <p>Adicionaremos o módulo btrfs no dracut e também uma linha de referência ao diretório temporário:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;add_dracutmodules+=&quot;btrfs&quot;&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;tmpdir=/tmp&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span></code></pre></div>
@@ -179,39 +179,33 @@
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="ex">xbps-install</span> void-repo-nonfree</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a><span class="ex">xbps-install</span> nvidia xf86-video-intel xf86-video-fbdev intel-video-accel mesa-vulkan-intel</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a><span class="ex">xbps-install</span> xorg-minimal xf86-input-evdev</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a><span class="ex">xbps-install</span> iwd openresolv</span></code></pre></div>
-<p>Configurando iwd para utilizar openresolv e cliente dhcp interno. Crie e edite o arquivo /etc/iwd/main.conf colocando:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>[<span class="ex">General</span>]</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a><span class="va">EnableNetworkConfiguration=</span>true</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a>[<span class="ex">Network</span>]</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a><span class="va">NameResolvingService=</span>resolvconf</span></code></pre></div>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a><span class="ex">xbps-install</span> iwd openresolv</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a><span class="ex">xbps-install</span> NetworkManager <span class="co"># caso queira utilizar o NetworkManager para conectar a internet</span></span></code></pre></div>
 <p>O seu sistema está pronto para bootar. Pode instalar tudo o que quiser agora antes de reiniciar. Fica a seu critério.</p>
 <p>Saindo do chroot e reiniciando:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="bu">exit</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a><span class="fu">umount</span> -R /mnt</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true"></a><span class="ex">shutdown</span> -r now</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a><span class="bu">exit</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a><span class="fu">umount</span> -R /mnt</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a><span class="ex">shutdown</span> -r now</span></code></pre></div>
+<h2 id="configurando-a-internet-e-finalizando">Configurando a internet e finalizando</h2>
 <p>Para conectar o wifi com o iwd, é necessário adicionar os serviços ao sistema.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a><span class="fu">ln</span> -s /etc/sv/dbus /var/service/</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a><span class="fu">ln</span> -s /etc/sv/iwd /var/service/</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="fu">ln</span> -s /etc/sv/dbus /var/service/</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a><span class="fu">ln</span> -s /etc/sv/iwd /var/service/</span></code></pre></div>
 <p>Para utilizar o iwd você encontra vários tutoriais na internet, mas ele é muito mais estável e simples do que o wpa_supplicant. Aqui só irei ensinar como configurá-lo para utilizar o cliente dhcp interno e o openresolv.</p>
 <p>Edite ou crie o arquivo /etc/iwd/main.conf e coloque:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>[<span class="ex">General</span>]</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a><span class="va">EnableNetworkConfiguration=</span>true</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a>[<span class="ex">Network</span>]</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true"></a><span class="va">NameResolvingService=</span>resolvconf</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>[<span class="ex">General</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a><span class="va">EnableNetworkConfiguration=</span>true</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a>[<span class="ex">Network</span>]</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true"></a><span class="va">NameResolvingService=</span>resolvconf</span></code></pre></div>
 <p>Se for utilizar o NetworkManager para conectar a internet, ele também pode ser configurado para utilizar o iwd e openresolv.</p>
-<p>Instalando:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="ex">xbps-install</span> NetworkManager</span></code></pre></div>
 <p>Crie um arquivo em /etc/NetworkManager/conf.d/ com o nome de sua preferência, como rc-manager.conf por exemplo, e coloque:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a>[<span class="ex">main</span>]</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a><span class="ex">rc-manager</span>=resolvconf</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>[<span class="ex">main</span>]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a><span class="ex">rc-manager</span>=resolvconf</span></code></pre></div>
 <p>Para utilizar o iwd crie outro arquivo em /etc/NetworkManager/conf.d/, como wifi.conf, com o seguinte conteúdo:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>[<span class="ex">device</span>]</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a><span class="ex">wifi.backend</span>=iwd</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a>[<span class="ex">device</span>]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a><span class="ex">wifi.backend</span>=iwd</span></code></pre></div>
 <p>Coloque o serviço para iniciar:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a><span class="fu">ln</span> -s /etc/sv/NetworkManager /var/service/</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="fu">ln</span> -s /etc/sv/NetworkManager /var/service/</span></code></pre></div>
 <p>Feito. Utilize o NetworkManager normalmente como utilizaria em qualquer outro sistema.</p>
 <p>Agora é só prosseguir normalmente, criando seu usuário (coloque ele no grupo network para poder conectar a internet e utilizar o NetworkManager), instalando os programas que quiser e por fim começar a utilizar uma das distribuições Linux mais enxutas e rápidas atualmente.</p>
 </body>
