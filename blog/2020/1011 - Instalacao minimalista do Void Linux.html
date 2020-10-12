@@ -169,7 +169,7 @@
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="va">UUID=</span>e2f9d238-fc81-44ea-b2c4-11d40ee1e49c <span class="ex">/boot</span> ext4 defaults,noatime 0 2</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a><span class="va">UUID=</span>3D6A-2654 <span class="ex">/boot/efi</span> vfat defaults,noatime 0 2</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a><span class="ex">tmpfs</span> /tmp tmpfs defaults,nosuid,nodev 0 0</span></code></pre></div>
-<h2 id="instalando-e-configurando-o-grub">Instalando e configurando o Grub</h2>
+<h2 id="instalando-e-configurando-o-grub-e-outros-pacotes">Instalando e configurando o Grub e outros pacotes</h2>
 <p>Adicionaremos o módulo btrfs no dracut e também uma linha de referência ao diretório temporário:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;add_dracutmodules+=&quot;btrfs&quot;&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&#39;tmpdir=/tmp&#39;</span> <span class="op">&gt;&gt;</span> /etc/dracut.conf</span></code></pre></div>

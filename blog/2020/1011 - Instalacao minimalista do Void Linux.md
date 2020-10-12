@@ -172,7 +172,7 @@ UUID=3D6A-2654 /boot/efi vfat defaults,noatime 0 2
 tmpfs /tmp tmpfs defaults,nosuid,nodev 0 0
 ```
 
-## Instalando e configurando o Grub
+## Instalando e configurando o Grub e outros pacotes
 
 Adicionaremos o módulo btrfs no dracut e também uma linha de referência ao diretório temporário:
 
