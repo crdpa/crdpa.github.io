@@ -2,13 +2,18 @@
 ## 11/10/2020
 
 Este guia é um passo a passo de como instalar a distribuição Void Linux de maneira manual e bastante enxuta. É um meio alternativo de se instalar e selecionar a dedo cada componente que fará parte do seu sistema.
+
 Quando me aventurei no Linux pela primeira vez, com o Mandrake, sempre tive a sensação de que o sistema era  um pouco cheio de pacotes e softwares redundantes. Isso vem da época que as distribuições vinham em vários CDs. Até que um dia me deparei com Slackware e comecei a entender como tudo funcionava por baixo dos panos.
+
 Anos se passaram e com toda a experiência adquirida, finalmente achei meu lar na distribuição Gentoo. Como vocês devem saber, o Gentoo da um bocado de trabalho pra instalar e manter, mas depois que se pega o jeito você acaba até adquirindo um certo apego, pois conhece tudo no seu sistema e sabe exatamente como e porque as coisas funcionam.
 Um certo dia acabei formatando sem querer a partição onde o Gentoo estava instalado e não havia nenhum backup. A idéia de começar tudo do zero, configurar e recompilar o kernel, me deixou extremamente desanimado.
+
 Foi aí que me deparei com o Void Linux.
 
 Simples, minimalista, rápido e sem necessidade de configurar o próprio kernel. Não senti a mínima vontade de voltar para o Gentoo, apesar de ainda me passar pela cabeça uma ou duas vezes no ano.
+
 Eu pensei até que estaria aos poucos abandonando essa idéia de ter um sistema minimalista e simplificado. O que me fez algumas vezes migrar para distribuições mais automatizadas como Manjaro ou Fedora, mas após utilizar por duas ou três semanas acabo voltando para o Void.
+
 Eu sempre fico com aquela sensação de falta de controle das coisas. Onde tudo acontece nos bastidores, um monte de pacotes e softwares desnecessários são instalados, serviços demais rodando, pra fazer exatamente a mesma coisa que eu fazia no Void (ou Gentoo) de maneira mais rápida e utilizando menos recursos.
 
 Já ficou claro que esse é um texto/guia bem particular. Não significa que essa seja a maneira certa de se manter um sistema operacional e que utilizar Fedora ou Ubuntu signifique que você não tenha controle do seu sistema. Pelo contrário. Acredito que a maioria dos administradores de sistemas Linux utilizam esse tipo de distribuição.
@@ -19,6 +24,7 @@ Caso você prefira instalar rapidamente e já ter tudo pronto para utilizar, ess
 ## Formatando e particionando
 
 Eu prefiro utilizar outra distribuição para instalar o Void Linux, pois apesar das imagens do Void serem suficiente, gosto de ter um sistema mais completo e automatizado para fazer outras coisas enquanto instalo e também para não correr riscos de faltar algum software especĩfico. Pode ser Fedora, Ubuntu, Manjaro ou mesmo o Void Linux, fica a seu critério.
+
 Assim que baixar a distribuição de sua escolha, crie o seu pendrive USB bootável.
 No meu caso, escolhi o Manjaro XFCE.
 
@@ -31,7 +37,9 @@ Agora é só reiniciar o computador e bootar no pendrive.
 Feito isso, é hora de particionar. No Manjaro eu utilizo o GParted para facilitar o processo. Irei utilizar o sistema de arquivos btrfs para a partição raiz. Tudo ficará dessa maneira:
 
 /dev/sda1: fat32, 600MB (partição EFI onde ficará o kernel)
+
 /dev/sda2: ext4, 1 GB (partição /boot)
+
 /dev/sda3: btrfs (restante do espaço onde ficará a partição raiz e diretório home)
 
 Montando a partição raiz e criando subvolumes no sistema de arquivos btrfs:
@@ -124,6 +132,7 @@ Instalação básica completa! Agora iremos configurar.
 ## Configurando o sistema
 
 Especifique o hostname em /etc/hostname e edite /etc/rc.conf com suas preferências.
+
 Escolha a(s) localização(ões) correta(s) editando o arquivo /etc/default/libc-locales removendo o # do início da linha desejada e digite o comando a seguir:
 
 ``` {.bash}
@@ -131,6 +140,7 @@ xbps-reconfigure -f glibc-locales
 ```
 
 Hora de editar o /etc/fstab.
+
 Primeiro copie o arquivo de referência:
 
 ``` {.bash}
@@ -138,6 +148,7 @@ cp /proc/mounts /etc/fstab
 ```
 
 Remova as linhas que começam com proc, sys, devtmpfs and pts.
+
 Troque o último 0 por 1 da linha referente à partição raiz e das outras linhas troque por 2.
 
 Agora a parte chata. Você deve substituir todos os /dev/sda*/ por seus respectivos UUIDS.
