@@ -7,7 +7,7 @@ O fato da tecnologia ainda estar no início e ter certas restrições, fazia com
 
 A tecnologia evoluiu demais desde aquela época e hoje os sites fazem muito mais coisas do que só exibir imagens e textos, mas essas coisas são realmente necessárias?
 
-Virou lugar comum hoje em dia uma página com o objetivo de exibir um texto possuir 2 ou 3 megabytes. [Este texto](https://medium.com/the-delighted-blog/bloat-6bccea185816) de 400 palavras requer 1.2 megabytes. Sabe qual o tamanho de Anna Karenina, livro do Tolstoy? [2 megabytes](https://www.gutenberg.org/files/1399/1399-0.txt). O livro possui por volta de 800 páginas e 350 mil palavras. Há algo de errado quando algo desse tipo acontece.
+Virou lugar comum hoje em dia uma página com o objetivo de exibir um texto possuir 2 ou 3 megabytes. [Este texto](https://medium.com/the-delighted-blog/bloat-6bccea185816) de 400 palavras requer 1.2 megabytes. Sabe qual o tamanho de [Anna Karenina](https://www.gutenberg.org/files/1399/1399-0.txt), livro do Tolstoy? 2 megabytes. O livro possui por volta de 800 páginas e 350 mil palavras. Há algo de errado quando algo desse tipo acontece.
 
 Essas páginas são um problema nos computadores, mas são piores ainda em smartphones.
 
