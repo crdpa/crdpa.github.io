@@ -1,11 +1,11 @@
 ::selection {
-    background: #cc6699;
+    background: #b16286;
 }
 
 img {
-      width: auto ;
-        max-width: 100% ;
-          height: auto ;
+    width: auto ;
+    max-width: 100% ;
+    height: auto ;
 }
 
 @font-face {
