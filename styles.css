@@ -39,6 +39,14 @@ pre {
     border: 0;
 }
 
+a:link {
+      text-decoration: none;
+}
+
+a:hover {
+      text-decoration: underline;
+}
+
 a, a:active {
     color: #8ec07c;
 }
