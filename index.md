@@ -1,30 +1,20 @@
-![](/logo.png)
+![](/avatar.png)
 
-# Info
-Sou graduado como Tecnólogo em Automação Industrial pela Fatec e atualmente trabalho no Instituto Federal de São Paulo.
+# // devaneios
+- 2020 | [1130 - a pequena internet](blog/2020/1130 - a pequena internet.html)
+- 2020 | [1011 - instalacao minimalista do void linux](blog/2020/1011 - instalacao minimalista do void linux.html)
+- 2020 | [0617 - configurando bspwm e dois monitores](blog/2020/0617 - configurando bspwm e dois monitores.html)
+- 2020 | [0506 - bluetooth sem pulseaudio](blog/2020/0506 - bluetooth sem pulseaudio.html)
 
-Utilizo Linux exclusivamente desde os meus 16 anos de idade, começando pelo Mandrake, passando por Slackware, Debian, Gentoo e atualmente Void Linux.
+# // links
+- [github](https://github.com/crdpa/)
+- [gitlab](https://gitlab.com/crdpa/)
+- [lobsters](https://lobste.rs/u/crdpa)
+- [goodreads](https://www.goodreads.com/user/show/55958511-crdpa)
+- [letterboxd](https://letterboxd.com/crdpa/)
+- [gemini](gemini://republic.circumlunar.space/users/crdpa/)
 
-Criei esse site para escrever minhas idéias relacionadas a qualquer assunto que seja de meu interesse, funcionando como um portfólio e blog pessoal.
-
-# Habilidades
-- Linux
-- Bash
-- Go
-
-# Blog
-- 2020/[1130 - A pequena internet](blog/2020/1130 - A pequena internet.html)
-- 2020/[1011 - Instalacao minimalista do Void Linux](blog/2020/1011 - Instalacao minimalista do Void Linux.html)
-- 2020/[0617 - Configurando bspwm e dois monitores](blog/2020/0617 - Configurando bspwm e dois monitores.html)
-- 2020/[0506 - Bluetooth sem PulseAudio](blog/2020/0506 - Bluetooth sem PulseAudio.html)
-
-# Links
-- [Github](https://github.com/crdpa/)
-- [Gitlab](https://gitlab.com/crdpa/)
-- [Lobsters](https://lobste.rs/u/crdpa)
-- [Goodreads](https://www.goodreads.com/user/show/55958511-crdpa)
-- [Letterboxd](https://letterboxd.com/crdpa/)
-- [Gemini](gemini://republic.circumlunar.space/users/crdpa/)
-
-# Contato
+# // contato
 - crisdpa @ tuta.io
+- @crdpa:matrix.org
+- AC4FA1ED66A7293C0DFADD1151786924944617E3

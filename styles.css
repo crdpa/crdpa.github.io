@@ -27,34 +27,34 @@ body {
     line-height: 1.4;
     margin: 40px auto;
     max-width: 800px;
-    background: #333333;
-    color: #cccccc;
+    background: #282828;
+    color: #ebdbb2;
 }
 
 pre {
     background-color: #222222;
-    color: #99cc66;
+    color: #a89984;
     padding: 1em;
     overflow: auto;
     border: 0;
 }
 
 a, a:active {
-    color: #ccff99;
+    color: #8ec07c;
 }
 
 a:visited {
-    color: #999999;
+    color: #689d6a;
 }
 
     h1, h2, h3, h4, h5 {
     font-size: 100%;
-    color: #cc99ff;
+    color: #d79921;
     margin-bottom: .1rem;
 }
 
 blockquote {
-    border-left: 1px solid #cccccc;
+    border-left: 1px solid #928374;
     font-family: Hermit, Liberation Mono, DejaVu Sans Mono, Consolas, Monaco, Lucida Console, monospace, monospace;
 }
 
