@@ -16,5 +16,4 @@
 
 # // contato
 - crisdpa @ tuta.io
-- @crdpa:matrix.org
 - [AC4F](/pubkey.asc) A1ED 66A7 293C 0DFA DD11 5178 6924 9446 17E3
