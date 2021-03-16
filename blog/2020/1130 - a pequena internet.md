@@ -41,4 +41,4 @@ Como foi falado, todo o conteúdo é texto. Portanto o que você mais encontrar�
 
 A pequena internet é bem pequena, mas como é formada por comunidades unidas, então tende a ser bem amigável. Qualquer pessoa é muito bem vinda.
 
-Existe muito mais coisas que eu não falei aqui, como os pubnixes e o tildeverso, que também fazem parte da pequena internet e estão bem relacionadas, mas o assunto é bem extenso e esse texto já serve  pra se ter uma idéia de como é uma parte da pequena internet e espalhar mais sobre a sua existência.
+Existem muito mais coisas que eu não falei aqui, como os pubnixes e o tildeverso, que também fazem parte da pequena internet e estão bem relacionadas, mas o assunto é extenso. O intuito aqui é disseminar mais a pequena internet para o público brasileiro e espero que consiga capturar o interesse de algumas pessoas. Nos vemos lá!
