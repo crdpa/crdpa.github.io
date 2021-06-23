@@ -1,7 +1,6 @@
 # // links
 - [github](https://github.com/crdpa/)
 - [gitlab](https://gitlab.com/crdpa/)
-- [lobsters](https://lobste.rs/u/crdpa)
 - [goodreads](https://www.goodreads.com/user/show/55958511-crdpa)
 - [letterboxd](https://letterboxd.com/crdpa/)
 
